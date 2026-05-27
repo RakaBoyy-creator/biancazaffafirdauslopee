@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 17th Birthday Bianca 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffe6ea 0%, #ffb3c6 100%);
+            color: #590d22;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Login Screen --- */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffb3c6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.3);
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .login-box h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px 20px;
+            border: 2px solid #ffb3c6;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            width: 80%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #c9184a;
+            transform: scale(1.05);
+        }
+
+        /* --- Main Content --- */
+        #main-content {
+            display: none; /* Hidden until login */
+            position: relative;
+        }
+
+        /* Floating Hearts Background */
+        .heart {
+            position: fixed;
+            top: -10vh;
+            font-size: 20px;
+            color: rgba(255, 77, 109, 0.5);
+            animation: fall linear forwards;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            color: #ff4d6d;
+            text-shadow: 2px 2px 5px rgba(255,77,109,0.3);
+            margin-bottom: 10px;
+        }
+
+        header h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: #ff4d6d;
+            color: white;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255,77,109,0.4);
+        }
+
+        /* Scroll Sections */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        @media (max-width: 768px) {
+            .section, .section:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .img-container {
+            flex: 1;
+        }
+
+        .img-container img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.4);
+            border: 5px solid white;
+        }
+
+        .text-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .text-container p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Scroll Animation Classes */
+        .hidden-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1.2s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .hidden-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1.2s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .show-scroll {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Envelope Section --- */
+        .envelope-section {
+            text-align: center;
+            padding: 80px 20px 100px;
+        }
+
+        .envelope-section p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .envelope-icon {
+            font-size: 5em;
+            cursor: pointer;
+            display: inline-block;
+            animation: float 2s infinite ease-in-out, pulse 1.5s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.1) translateY(-15px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+
+        /* --- Popup Modal --- */
+        #popup {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(89, 13, 34, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.5s;
+        }
+
+        #popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.7);
+            transition: 0.5s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        #popup.active .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-content img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .popup-content h3 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4d6d;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .popup-content p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: #ff4d6d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Haii Sayangku!</h2>
+            <p style="margin-bottom: 15px;">Masukin kata kuncinya dulu yaa ❤️</p>
+            <input type="text" id="password" placeholder="Apa kata kuncinya?">
+            <br>
+            <button onclick="checkPassword()">Buka Kado</button>
+            <p id="error-msg" style="color: red; margin-top: 10px; display: none;">Salah wleee, coba inget-inget lagi!</p>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <h1>Happy 17th Birthday!</h1>
+            <h3>Bianca Zaffa Firdaus</h3>
+            <div class="status-badge">Status: Punya RakaBoyy 🔒</div>
+        </header>
+
+        <div class="section">
+            <div class="img-container hidden-left">
+                <img src="quality_restoration_20260303070126370.jpg" alt="Bianca 1">
+            </div>
+            <div class="text-container hidden-right">
+                <p>Ciee udah makin gede nih umurnya. Di umur kamu yang ke 17 tahun ini, aku mau ngucapin selamat ulang tahun buat bidadari paling cantik yang pernah aku kenal. Semoga di umur yang baru ini kamu makin dewasa, makin cantik, dan selalu dikelilingi kebahagiaan ya sayang. 💕</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="img-container hidden-right">
+                <img src="quality_restoration_20260511061839197.jpg" alt="Bianca 2">
+            </div>
+            <div class="text-container hidden-left">
+                <p>Makasih ya udah mau sabar sama aku, udah selalu ada buat aku, dan udah jadi alasan kenapa aku selalu senyum-senyum sendiri. Melihat wajah cantik kamu bikin hari-hari aku yang berat terasa ringan banget. Kamu tuh beneran candu buat aku. ✨</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="img-container hidden-left">
+                <img src="MEITU_20260420_231151770.jpg" alt="Bianca 3">
+            </div>
+            <div class="text-container hidden-right">
+                <p>Harapan aku buat kamu, semoga apa yang kamu impikan dan cita-citakan bisa segera terwujud. Jangan pernah sedih, karena kamu punya RakaBoyy yang bakal selalu dukung dan jagain kamu. *I love you in every universe, Bianca.* 🌍❤️</p>
+            </div>
+        </div>
+
+        <div class="envelope-section">
+            <p class="hidden-left">Ada satu pesan lagi nih buat kesayangan RakaBoyy...</p>
+            <div class="envelope-icon hidden-right" onclick="openPopup()">💌</div>
+            <p style="font-size: 0.9em; margin-top:10px; color:#c9184a;">(Klik amplopnya ya!)</p>
+        </div>
+    </div>
+
+    <div id="popup">
+        <div class="popup-content">
+            <img src="Proyek Baru 190 [036ADD0].jpg" alt="RakaBoyy & Bianca">
+            <h3>I Love You 🌷🌹</h3>
+            <p>"Sayangku Bianca, makasih ya udah nemenin aku. Semoga hubungan kita makin langgeng, makin bahagia, dan kita bisa ngelewatin banyak ulang tahun bareng-bareng ke depannya. Happy sweet seventeen! Aku sayang kamu banget banget banget."</p>
+            <p><strong>- From your RakaBoyy -</strong></p>
+            <div class="close-btn" onclick="closePopup()">Tutup Surat</div>
+        </div>
+    </div>
+
+    <script>
+        // --- Sistem Password & Autoplay Music ---
+        function checkPassword() {
+            let pass = document.getElementById('password').value.toLowerCase();
+            if(pass === "lopyuu") {
+                // Mainkan musik
+                let bgMusic = document.getElementById('bg-music');
+                bgMusic.volume = 0.5; // atur volume 50% biar gak terlalu kaget
+                bgMusic.play();
+
+                // Efek transisi masuk ke web
+                document.getElementById('login-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    createHearts(); // Mulai animasi hati berjatuhan
+                }, 1000);
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        // --- Animasi Scroll (Muncul dari Samping) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-scroll');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        // Tunggu sedikit sampai konten dimuat, lalu pantau elemen
+        setTimeout(() => {
+            const hiddenElements = document.querySelectorAll('.hidden-left, .hidden-right');
+            hiddenElements.forEach((el) => observer.observe(el));
+        }, 1500);
+
+        // --- Fungsi Buka/Tutup Amplop Popup ---
+        function openPopup() {
+            document.getElementById('popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        // --- Animasi Hati Berjatuhan ---
+        function createHearts() {
+            const colors = ['#ff4d6d', '#ff758f', '#ffb3c6', '#c9184a'];
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.getElementById('main-content').appendChild(heart);
+
+                // Hapus elemen hati setelah jatuh supaya tidak memenuhi memori
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300); // Setiap 300ms buat hati baru
+        }
+    </script>
+</body>
+</html>
